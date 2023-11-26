@@ -1,0 +1,54 @@
+#!/bin/bash
+
+####################################################################
+# Script: SSH Server Hardening Script
+# Author: rtwolfe2023
+# Description: This script, built with OpenAI's GPT-3.5 Turbo (v1.1.0.6),
+# installs and hardens the SSH server by applying security best practices.
+####################################################################
+
+set -e
+
+# Install SSH server
+echo "Installing SSH server..."
+sudo apt update
+sudo apt install openssh-server -y
+
+# Backup original SSH configuration
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bak
+
+# Update SSH configuration
+echo "Updating SSH configuration..."
+sudo sed -i 's/#Port 22/Port 2222/' /etc/ssh/sshd_config
+sudo sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config
+
+# Disable password authentication and empty passwords
+sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/#PermitEmptyPasswords yes/PermitEmptyPasswords no/' /etc/ssh/sshd_config
+
+# Enable public key authentication
+sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+
+# Limit authentication methods to public key and remove unused methods
+sudo sed -i 's/#ChallengeResponseAuthentication yes/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/#UsePAM yes/UsePAM no/' /etc/ssh/sshd_config
+sudo sed -i 's/#KerberosAuthentication no/KerberosAuthentication no/' /etc/ssh/sshd_config
+sudo sed -i 's/#GSSAPIAuthentication no/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+
+# Set client alive interval and count to disconnect inactive clients
+sudo sed -i 's/#ClientAliveInterval 0/ClientAliveInterval 180/' /etc/ssh/sshd_config
+sudo sed -i 's/#ClientAliveCountMax 3/ClientAliveCountMax 2/' /etc/ssh/sshd_config
+
+# Configure host-based access control
+echo "sshd: ALL" | sudo tee -a /etc/hosts.deny >/dev/null
+
+# Restart SSH service
+echo "Restarting SSH service..."
+sudo systemctl restart sshd
+
+echo "SSH server installation and hardening completed successfully."
+
+# Enable SSH service
+sudo systemctl enable sshd
+
+Remember to run the script with sudo or as the root user for the necessary permissions.
