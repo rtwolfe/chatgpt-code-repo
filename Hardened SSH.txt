@@ -3,6 +3,7 @@
 ####################################################################
 # Script: SSH Server Hardening Script
 # Author: rtwolfe2023
+# GPTBot: https://t.me/neuralnavigator
 # Description: This script, built with OpenAI's GPT-3.5 Turbo (v1.1.0.6),
 # installs and hardens the SSH server by applying security best practices.
 ####################################################################
