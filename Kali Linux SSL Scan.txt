@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Script: Kali Linux SSL Scan
+# Author: rtwolfe2023
+# GPTBot: https://t.me/neuralnavigator
+# Description: This script allows you to perform SSL/TLS scans using SSLScan on Kali Linux. It interactively prompts you for the target, port, and various SSLScan options to customize the scan.
+
+# Function to prompt for user input with a default value
+prompt_option() {
+  local prompt_message="$1 [Y/n]: "
+  local default_choice="${2:-y}"
+
+  while true; do
+    read -p "$prompt_message" choice
+    choice="${choice,,}" # Convert the choice to lowercase
+
+    case "$choice" in
+      y|yes ) return 0;;
+      n|no ) return 1;;
+      "" ) return "$default_choice";; # Return default choice if Enter is pressed
+      * ) echo "Invalid choice. Please enter 'y' or 'n'.";;
+    esac
+  done
+}
+
+# Initialize SSLScan command
+sslscan_command="sslscan"
+
+# Prompt for target
+read -p "Enter the target IP or hostname: " target
+sslscan_command="$sslscan_command $target"
+
+# Prompt for target port with a default value of 443
+read -p "Enter the target port [443]: " port
+port="${port:-443}"
+sslscan_command="$sslscan_command -t $port"
+
+# Prompt for options
+if prompt_option "Disable colorized output"; then
+  sslscan_command="$sslscan_command --no-colour"
+fi
+
+if prompt_option "Suppress failed cipher suites in the output"; then
+  sslscan_command="$sslscan_command --no-failed"
+fi
+
+# Add more prompts for other options as needed
+
+# Run the SSLScan command
+echo "Running SSLScan with the following options:"
+echo "$sslscan_command"
+$sslscan_command
+
+You can copy and paste this script into a text file, save it with a .sh extension (e.g., sslscan_script.sh), make it executable using the following command:
+
+chmod +x sslscan_script.sh
+
+./sslscan_script.sh
+
+The script will guide you through providing the necessary input and selecting SSLScan options interactively.
