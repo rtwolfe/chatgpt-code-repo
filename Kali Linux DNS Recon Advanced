@@ -2,3 +2,80 @@
 # Author: rtwolfe2023
 # GPTBot: https://t.me/neuralnavigator
 # Description:
+
+#!/bin/bash
+
+# Function to run DNSChef
+run_dnschef() {
+    sudo dnschef --interface eth0 --fakeip 192.168.1.100 --file "$output_dir/dnschef.log" &
+    wait_for_process "$!" "DNSChef"
+}
+
+# Function to run DNSWalk
+run_dnswalk() {
+    dnsrecon -d "$target_domain" -t std --xml "$output_dir/dns_walk.xml"
+    check_command_status "DNSWalk"
+}
+
+# Function to run DNSTracer
+run_dnstracer() {
+    dnstracer -o "$output_dir/dnstracer.log" "$target_domain"
+    check_command_status "DNSTracer"
+}
+
+# Function to run DNSRecon
+run_dnsrecon() {
+    dnsrecon -d "$target_domain" -t brt --xml "$output_dir/dns_recon.xml"
+    check_command_status "DNSRecon"
+}
+
+# Function to run DNSEnum
+run_dnsenum() {
+    dnsenum "$target_domain" > "$output_dir/dns_enum.txt"
+    check_command_status "DNSEnum"
+}
+
+# Function to run Dnmap
+run_dnmap() {
+    dnmap -d "$target_domain" -o "$output_dir/dnmap_results.txt"
+    check_command_status "Dnmap"
+}
+
+# Function to check command status and exit if there's an error
+check_command_status() {
+    if [ $? -eq 0 ]; then
+        echo "$1 completed successfully."
+    else
+        echo "$1 encountered an error. Exiting."
+        exit 1
+    fi
+}
+
+# Function to wait for a background process to finish
+wait_for_process() {
+    local pid="$1"
+    local process_name="$2"
+
+    wait "$pid"
+    if [ $? -eq 0 ]; then
+        echo "$process_name completed."
+    else
+        echo "$process_name encountered an error. Exiting."
+        exit 1
+    fi
+}
+
+# Prompt the user for the target domain
+read -p "Enter the target domain name: " target_domain
+
+# Output directory
+output_dir="/opt/dns"
+
+# Ensure the output directory exists or create it
+mkdir -p "$output_dir"
+
+# Run each tool based on user input
+# ... (same code as before)
+
+# Provide a summary of the results at the end
+echo "DNS reconnaissance completed. Results copied to $output_dir"
