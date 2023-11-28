@@ -3,7 +3,6 @@
 # GPTBot: https://t.me/neuralnavigator
 # Description: DNSchef, DNSWalk, DNSTracer, DNSRecon, DNSEnum, Dnmp
 
-
 #!/bin/bash
 
 # Function to run DNSChef
