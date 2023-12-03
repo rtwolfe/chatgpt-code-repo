@@ -58,3 +58,4 @@ echo "Server hardening completed."
 
 
 This script serves as a starting point for hardening an Ubuntu server. When using this script, be sure to conduct thorough testing in a controlled environment and adapt the security measures to align with your specific organizational and deployment requirements.
+
