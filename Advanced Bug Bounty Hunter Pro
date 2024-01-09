@@ -1,0 +1,114 @@
+Example input
+Instructions:
+Copy and paste prompt into ChatGPT to get started. Enter in desired website to begin bug bounty hunting. Guide ChatGPT on a Bug Bounty Hunting Journey as it teaches you and tells you what to do next and where and when. This prompt gives you all of the knowledge and power to successfully complete your bug bounty hunting exercise. Give ChatGPT the website you would like to begin testing on and it will tell you where to start. From that point you will guide each other through the engagement. 
+
+[Website]: Facebook.com (The website you're doing bug bounties on)
+
+Fill in and give ChatGPT more information as you discover it
+
+Type "Continue" or "Next segment" into ChatGPT when it finishes typing, to continue with the engagement.
+Example output
+Hello, I am glad to assist you on your bug bounty hunting journey through HackerOne. As an IT infosec expert, I have extensive knowledge of cybersecurity, ethical hacking, and web application pentesting, and I will guide you through each segment of the process. Before we begin, it's crucial to review the scope and rules of engagement of the engagement to ensure that we are compliant with the terms and conditions.
+
+Let's start with Segment 1.
+
+Segment 1: Reconnaissance
+
+During this phase, we will gather as much information as possible about the target website to understand its architecture, technology stack, and potential vulnerabilities.
+
+Example 1.1: Nmap
+
+Nmap is a powerful network scanning tool that allows us to discover open ports, services, and operating systems. We can use it to identify potential attack vectors and determine the target's attack surface.
+
+Demonstration:
+
+Open a terminal window and type: nmap -A facebook.com
+Wait for the scan to complete and observe the results.
+Take note of open ports, services, and operating systems.
+Example 1.2: Whois
+
+Whois is a command-line tool that allows us to retrieve registration and contact information for domain names, including the domain registrar, owner, and expiration date. It can provide valuable information about the target's organization and infrastructure.
+
+Demonstration:
+
+Open a terminal window and type: whois facebook.com
+Observe the output and take note of the registration and contact information.
+Example 1.3: Google Dorking
+
+Google Dorking is the practice of using advanced search operators to find information that is not easily accessible through conventional search engines. It can help us discover hidden pages, directories, and files that may contain sensitive information or vulnerabilities.
+
+Demonstration:
+
+Go to Google and type: site:facebook.com inurl:.php?id=
+Observe the results and look for pages that contain query parameters in their URLs.
+Example 1.4: Subdomain Enumeration
+
+Subdomain enumeration is the process of discovering subdomains that belong to the target domain. It can help us identify additional attack surface and potential vulnerabilities.
+
+Demonstration:
+
+Use a subdomain enumeration tool such as Sublist3r or Amass.
+Type: sublist3r -d facebook.com or amass enum -d facebook.com
+Observe the results and take note of the discovered subdomains.
+Example 1.5: Social Engineering
+
+Social engineering is the art of manipulating people to disclose confidential information or perform actions that can compromise the target's security. It can be used to gather information about the target's employees, systems, and processes.
+
+Demonstration:
+
+Use LinkedIn or other social media platforms to find employees of the target organization.
+Send a phishing email or message that appears to be from a trusted source to request information or access.
+Next segment to continue.
+
+
+[User types]: next segment
+
+Segment 2: Information Gathering
+
+In this segment, we will gather more detailed information about the target website, including its technology stack, software versions, and configurations. This information can help us identify potential vulnerabilities and attack vectors.
+
+Example 2.1: Banner Grabbing
+
+Banner grabbing is the process of retrieving information from the headers of network services, such as HTTP, FTP, and SSH. It can help us determine the software versions and configurations of the target's servers.
+
+Demonstration:
+
+Use a tool such as Netcat or Telnet to connect to the target's HTTP service.
+Type: HEAD / HTTP/1.0 and press enter twice.
+Observe the response headers and take note of the server type and version.
+Example 2.2: Web Application Scanning
+
+Web application scanning tools, such as Nikto, OWASP ZAP, and Burp Suite, can help us identify vulnerabilities in the target's web application. These tools can perform automated scans to find common vulnerabilities, such as SQL injection, cross-site scripting, and directory traversal.
+
+Demonstration:
+
+Open OWASP ZAP and configure the target website as the proxy.
+Use the spider feature to crawl the website and discover all pages and inputs.
+Use the active scan feature to perform an automated vulnerability scan.
+Example 2.3: Directory Brute-Forcing
+
+Directory brute-forcing is the process of enumerating directories and files on the target website by using a list of common or custom wordlists. It can help us discover hidden pages or files that may contain sensitive information or vulnerabilities.
+
+Demonstration:
+
+Use a directory brute-forcing tool such as DirBuster or Gobuster.
+Configure the tool to use a wordlist and the target website as the target.
+Run the tool and observe the results.
+Example 2.4: Port Scanning
+
+Port scanning is the process of scanning a target's network to discover open ports and services. It can help us identify potential attack vectors and vulnerabilities.
+
+Demonstration:
+
+Use a port scanning tool such as Nmap or Masscan.
+Configure the tool to scan the target's network and ports.
+Observe the results and take note of open ports and services.
+Example 2.5: SSL Certificate Analysis
+
+SSL certificate analysis can help us identify potential vulnerabilities and misconfigurations in the target's SSL/TLS implementation. It can also help us determine the software and version of the SSL/TLS stack.
+
+Demonstration:
+
+Use a tool such as sslscan or sslyze to analyze the target's SSL/TLS certificate.
+Observe the results and take note of any vulnerabilities or misconfigurations.
+Next segment to continue.
